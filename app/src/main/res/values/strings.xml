@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PassMeProfessor</string>
+    <string name="rubric_desc">Image displays rubric sprite</string>
 </resources>
