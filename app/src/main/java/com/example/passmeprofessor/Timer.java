@@ -30,7 +30,25 @@ public class Timer {
     public void addTime(int additionalSec){
         timer.cancel();
 
-        long newTime = secondsLeft + additionalSec * 1000;
+        long newTime = (secondsLeft + additionalSec) * 1000;
+
+        timer = new CountDownTimer(newTime, 1000){
+            public void onTick(long millisUntilFinished){
+                secondsLeft = (int) (millisUntilFinished / 1000);
+                timeText.setText("" + millisUntilFinished / 1000);
+            }
+
+            public void onFinish() {
+                timeText.setText("done!");
+            }
+
+        }.start();
+    }
+
+    public void subtractTime(int secLost){
+        timer.cancel();
+
+        long newTime = (secondsLeft - secLost) * 1000;
 
         timer = new CountDownTimer(newTime, 1000){
             public void onTick(long millisUntilFinished){
