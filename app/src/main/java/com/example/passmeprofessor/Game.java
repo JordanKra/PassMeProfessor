@@ -1,4 +1,6 @@
 package com.example.passmeprofessor;
+
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class Game {
@@ -9,49 +11,49 @@ public class Game {
 
     private long score;
 
-    public Game(){
+    public Game() {
 
     }
 
     //Performs all operations necessary to build first Timer
-    public void buildTimer(int totalGameSeconds, TextView timerText){
+    public void buildTimer(int totalGameSeconds, TextView timerText) {
         timer = new Timer(totalGameSeconds, timerText);
     }
 
     //Performs all operations necessary to build first Rubric
-    public void buildRubric(){
+    public void buildRubric() {
         currentRubric = new Rubric();
     }
 
     //Performs all operations necessary to build first Rubric
-    public void buildPaper(){
-        currentPaper = new Paper();
+    public void buildPaper(ImageView imgView) {
+        currentPaper = new Paper(imgView);
     }
 
     //Add a number of seconds to the timer
-    public void addTime(int addGameSeconds){
+    public void addTime(int addGameSeconds) {
         //timer.addTime(addGameSeconds);
     }
 
     //Add a number of points to the score
-    public void addScore(long addScorePoints){
+    public void addScore(long addScorePoints) {
         score += addScorePoints;
     }
 
-    public void evalSwipe(){
+    public void evalSwipe() {
 
     }
 
-    public void showGameOver(){
+    public void showGameOver() {
 
     }
 
-    public void setNewPaper(){
+    public void setNewPaper() {
         currentPaper.generateRandomPaper();
 
     }
 
-    public void updateUI(){
+    public void updateUI() {
         // currentPaper.updateUI()
         //
     }
