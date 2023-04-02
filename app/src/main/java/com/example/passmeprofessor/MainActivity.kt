@@ -80,7 +80,8 @@ class MainActivity : AppCompatActivity() {
 
 
 
+        var timer = Timer(95, timerText)
+        val paperSprite = Paper(findViewById<ImageView>(R.id.paper))
+        paperSprite.generateRandomPaper()
     }
-
-
 }
