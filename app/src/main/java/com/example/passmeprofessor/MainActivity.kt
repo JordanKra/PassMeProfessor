@@ -66,20 +66,6 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-
-        /*
-        val rootView = findViewById<View>(android.R.id.content)
-        val globalLayoutListener = object : ViewTreeObserver.OnGlobalLayoutListener {
-            override fun onGlobalLayout() {
-                rootView.viewTreeObserver.removeOnGlobalLayoutListener(this)
-                applyBlurToBackground()
-            }
-        }
-        rootView.viewTreeObserver.addOnGlobalLayoutListener(globalLayoutListener)
-        */
-
-
-
         var timer = Timer(95, timerText)
         val paperSprite = Paper(findViewById<ImageView>(R.id.paper))
         paperSprite.generateRandomPaper()
