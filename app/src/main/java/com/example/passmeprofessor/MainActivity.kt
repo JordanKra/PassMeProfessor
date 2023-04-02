@@ -1,9 +1,9 @@
 package com.example.passmeprofessor
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.TextView
 import android.widget.ImageView
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -12,8 +12,8 @@ class MainActivity : AppCompatActivity() {
 
         val timerText = findViewById<TextView>(R.id.timerText)
 
-        var timer =  Timer(95, timerText)
-        var paper_sprite = Paper(findViewById<ImageView>(R.id.paper))
-        paper_sprite.generateRandomPaper()
+        var timer = Timer(95, timerText)
+        val paperSprite = Paper(findViewById<ImageView>(R.id.paper))
+        paperSprite.generateRandomPaper()
     }
 }
