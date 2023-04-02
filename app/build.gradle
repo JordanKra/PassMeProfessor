@@ -11,6 +11,8 @@ android {
         applicationId "com.example.passmeprofessor"
         minSdk 21
         targetSdk 32
+        renderscriptTargetApi 19
+        renderscriptSupportModeEnabled true
         versionCode 1
         versionName "1.0"
 
@@ -33,7 +35,6 @@ android {
 }
 
 dependencies {
-
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.5.0'
