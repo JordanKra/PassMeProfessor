@@ -10,6 +10,8 @@ import android.widget.TextView
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 
+import android.os.CountDownTimer
+import android.widget.Button
 
 class MainActivity : AppCompatActivity() {
     private lateinit var originalBitmap: Bitmap
@@ -76,6 +78,8 @@ class MainActivity : AppCompatActivity() {
         }
         rootView.viewTreeObserver.addOnGlobalLayoutListener(globalLayoutListener)
         */
+
+
 
     }
 
