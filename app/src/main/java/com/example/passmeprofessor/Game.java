@@ -3,8 +3,12 @@ package com.example.passmeprofessor;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class Game {
+import java.util.ArrayList;
+import java.util.List;
 
+public class Game {
+    private List<TimerEndListener> TimerEndListeners = new ArrayList<>();
+    private List<SwipeListener> SwipeListeners = new ArrayList<>();
     private Timer timer;
     private Rubric currentRubric;
     private Paper currentPaper;
@@ -15,9 +19,14 @@ public class Game {
 
     }
 
+    public void addTimerEndEventListener(TimerEndListener listener){
+        TimerEndListeners.add(listener);
+    }
+
     //Performs all operations necessary to build first Timer
     public void buildTimer(int totalGameSeconds, TextView timerText) {
-        timer = new Timer(totalGameSeconds, timerText);
+        timer = new Timer(totalGameSeconds, timerText, this);
+        addTimerEndEventListener(this.timer);
     }
 
     //Performs all operations necessary to build first Rubric
@@ -50,12 +59,21 @@ public class Game {
 
     public void setNewPaper() {
         currentPaper.generateRandomPaper();
-
     }
 
     public void updateUI() {
         // currentPaper.updateUI()
         //
+    }
+
+    public static void sendTimerEndEvent(){
+
+    }
+
+    public void fireTimerEndEvent(TimerEndEvent event){
+        for(TimerEndListener listener: TimerEndListeners){
+            listener.onTimerEnd(event);
+        }
     }
 
 }
