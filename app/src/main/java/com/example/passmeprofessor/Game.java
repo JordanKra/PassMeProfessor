@@ -41,7 +41,11 @@ public class Game {
 
     //Add a number of seconds to the timer
     public void addTime(int addGameSeconds) {
-        //timer.addTime(addGameSeconds);
+        timer.addTime(addGameSeconds);
+    }
+
+    public void subtractTime(int subtractGameSeconds){
+        timer.subtractTime(subtractGameSeconds);
     }
 
     //Add a number of points to the score
