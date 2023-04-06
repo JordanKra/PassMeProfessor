@@ -66,9 +66,6 @@ private class MyGestureListener : GestureDetector.SimpleOnGestureListener() {
         val ydiff = Math.abs(event1.y.minus(event2.y))
         return true
 
-        var timer =  Timer(95, timerText)
-        var paper_sprite = Paper(findViewById<ImageView>(R.id.paper))
-        paper_sprite.generateRandomPaper()
     }
 
     private fun onLeftSwipe(){
