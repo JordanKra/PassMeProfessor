@@ -19,7 +19,7 @@ public class Paper {
         paper_map.put(1, R.drawable.paper_b);
         paper_map.put(2, R.drawable.paper_c);
         paper_map.put(3, R.drawable.paper_d);
-        paper_map.put(4, R.drawable.paper_f);
+        paper_map.put(4, R.drawable.paper_e);
     }
 
     public boolean getIfPass(){
