@@ -1,27 +1,22 @@
 package com.example.passmeprofessor
 
 import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.GestureDetectorCompat
-import kotlin.properties.Delegates
-
-
-private const val DEBUG_TAG = "Gestures"
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var game: Game
 
-    private lateinit var mDetector: GestureDetectorCompat
     private lateinit var gestureDetector: GestureDetector
     private var initialX = 250.0F
     private lateinit var paperView: ImageView
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // Set the screen to main screen
@@ -43,9 +38,9 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        paperView.setOnTouchListener {_, motionEvent ->
+        paperView.setOnTouchListener { _, motionEvent ->
             gestureDetector.onTouchEvent(motionEvent)
-            if(motionEvent.action == MotionEvent.ACTION_UP){
+            if (motionEvent.action == MotionEvent.ACTION_UP) {
                 animateImageViewToInitialPosition()
             }
             true
@@ -58,47 +53,5 @@ class MainActivity : AppCompatActivity() {
         val animator = ObjectAnimator.ofFloat(paperView, "x", initialX)
         animator.duration = 300
         animator.start()
-    }
-}
-    /*override fun onTouchEvent(event: MotionEvent): Boolean {
-        return if (gestureDetector.onTouchEvent(event)) {
-            true
-        } else {
-            super.onTouchEvent(event)
-        }
-    }*/
-
-private class MyGestureListener : GestureDetector.SimpleOnGestureListener() {
-
-    private val SWIPE_THRESHOLD = 100
-    private val SWIPE_VEL_THRESH = 100
-    override fun onDown(event: MotionEvent): Boolean {
-        Log.d(DEBUG_TAG, "onDown: $event")
-        return true
-    }
-
-    override fun onScroll(
-        e1: MotionEvent?,
-        e2: MotionEvent?,
-        distanceX: Float,
-        distanceY: Float
-    ): Boolean {
-        val diffx = (e2?.x ?: 0.0F) - (e1?.x ?: 0.0F)
-        return true
-    }
-
-    fun onSwipeHorizontal(diffx: Float){
-    }
-    override fun onFling(
-        event1: MotionEvent,
-        event2: MotionEvent,
-        velocityX: Float,
-        velocityY: Float
-    ): Boolean {
-        Log.d(DEBUG_TAG, "onFling: $event1 $event2 $velocityX $velocityY")
-        val xdiff = Math.abs(event1.x.minus(event2.x))
-        val ydiff = Math.abs(event1.y.minus(event2.y))
-        return true
-
     }
 }
