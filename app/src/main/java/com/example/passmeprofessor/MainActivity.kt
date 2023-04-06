@@ -37,6 +37,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun onRightSwipe(){
+
+    }
 }
 private class MyGestureListener : GestureDetector.SimpleOnGestureListener() {
 
