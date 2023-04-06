@@ -3,18 +3,24 @@ package com.example.passmeprofessor
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.GestureDetector
 import android.view.MotionEvent
+import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var game: Game
 
     private lateinit var gestureDetector: GestureDetector
-    private var initialX = 250.0F
+    private var initialX = 450.0F
     private lateinit var paperView: ImageView
+    private lateinit var animator: ObjectAnimator
+    private val LEFT_SWIPE_THRESH: Float = 200.0f
+    private val RIGHT_SWIPE_THRESH: Float = 500.0f
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,9 +34,6 @@ class MainActivity : AppCompatActivity() {
         //Build first paper in game instance with ImageView paper
         game.buildPaper(findViewById(R.id.paper))
         paperView = findViewById(R.id.paper)
-        //initialX = paperView.x
-        //paperSprite.generateRandomPaper()
-
 
         gestureDetector = GestureDetector(this, object : HorizontalSwipeListener() {
             override fun onSwipeHorizontal(diffX: Float) {
@@ -41,7 +44,26 @@ class MainActivity : AppCompatActivity() {
         paperView.setOnTouchListener { _, motionEvent ->
             gestureDetector.onTouchEvent(motionEvent)
             if (motionEvent.action == MotionEvent.ACTION_UP) {
-                animateImageViewToInitialPosition()
+                // Get x position of paper when it is released
+                val releasedAt = paperView.x
+
+                if (releasedAt <= LEFT_SWIPE_THRESH) {
+                    Log.d("Gestures: ", "LEFT SWIPE DETECTED!")
+                    //Do left swipe processing here
+                } else if (releasedAt >= RIGHT_SWIPE_THRESH) {
+                    Log.d("Gestures: ", "RIGHT SWIPE DETECTED!")
+                    //Do right swipe processing here
+                } else {
+                    //If user doesn't swipe far enough to register a swipe animate the paper returning to center and don't change player score
+                    Log.d("Gestures: ", "NO SWIPE DETECTED!")
+                    animateImageViewToInitialPosition()
+                    return@setOnTouchListener true
+                }
+                paperView.visibility = View.INVISIBLE
+                Log.d("Released at: ", "$releasedAt")
+                paperView.x = initialX
+                game.setNewPaper()
+                paperView.visibility = View.VISIBLE
             }
             true
         }
@@ -50,7 +72,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun animateImageViewToInitialPosition() {
-        val animator = ObjectAnimator.ofFloat(paperView, "x", initialX)
+        animator = ObjectAnimator.ofFloat(paperView, "x", initialX)
         animator.duration = 300
         animator.start()
     }
