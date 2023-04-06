@@ -3,16 +3,18 @@ package com.example.passmeprofessor;
 import android.os.CountDownTimer;
 import android.widget.TextView;
 
-public class Timer {
+public class Timer implements TimerEndListener{
     private CountDownTimer timer;
     private TextView timeText;
     private int secondsLeft;
 
+    private Game GameInstance;
 
-    public Timer(int seconds, TextView timerText){
+    public Timer(int seconds, TextView timerText, Game instance){
         long converter = Long.valueOf(seconds) * Long.valueOf(1000);
         long temp = 1000;
         timeText = timerText;
+        GameInstance = instance;
 
         timer = new CountDownTimer(converter, temp){
             public void onTick(long millisUntilFinished){
@@ -21,7 +23,7 @@ public class Timer {
             }
 
             public void onFinish() {
-                timerText.setText("done!");
+                GameInstance.fireTimerEndEvent(new TimerEndEvent(this));
             }
 
         }.start();
@@ -39,7 +41,7 @@ public class Timer {
             }
 
             public void onFinish() {
-                timeText.setText("done!");
+                GameInstance.fireTimerEndEvent(new TimerEndEvent(this));
             }
 
         }.start();
@@ -57,12 +59,16 @@ public class Timer {
             }
 
             public void onFinish() {
-                timeText.setText("done!");
+                GameInstance.fireTimerEndEvent(new TimerEndEvent(this));
+
             }
 
         }.start();
     }
 
 
-
+    @Override
+    public void onTimerEnd(TimerEndEvent event) {
+        timeText.setText("done!");
+    }
 }
