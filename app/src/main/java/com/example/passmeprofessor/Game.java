@@ -30,8 +30,8 @@ public class Game {
     }
 
     //Performs all operations necessary to build first Rubric
-    public void buildRubric() {
-        currentRubric = new Rubric();
+    public void buildRubric(TextView a, TextView b, TextView c, TextView d, TextView e) {
+        currentRubric = new Rubric(a,b,c,d,e);
     }
 
     //Performs all operations necessary to build first Rubric
