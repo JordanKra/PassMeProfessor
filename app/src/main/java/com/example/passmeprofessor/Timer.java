@@ -3,7 +3,7 @@ package com.example.passmeprofessor;
 import android.os.CountDownTimer;
 import android.widget.TextView;
 
-public class Timer implements TimerEndListener{
+public class Timer implements TimerEndListener, SwipeListener{
     private CountDownTimer timer;
     private TextView timeText;
     private int secondsLeft;
@@ -70,5 +70,15 @@ public class Timer implements TimerEndListener{
     @Override
     public void onTimerEnd(TimerEndEvent event) {
         timeText.setText("done!");
+    }
+
+    @Override
+    public void onSwipeEvent(SwipeEvent event) {
+        //event has attribute Boolean correct that is initialized in Game.evalSwipe()
+        //if correct == true, then the user got the swipe correct
+        //if correct == false, then the user got the swipe wrong
+
+        //Recall game rule: if the swipe is correct, user earns more time
+            //if the swipe is incorrect, user loses time
     }
 }

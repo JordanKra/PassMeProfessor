@@ -5,7 +5,7 @@ import android.widget.ImageView;
 import java.util.Hashtable;
 import java.util.Random;
 
-public class Paper {
+public class Paper implements SwipeListener{
 
     Hashtable<Integer, Integer> paper_map = new Hashtable<>();
 
@@ -19,18 +19,22 @@ public class Paper {
         paper_map.put(1, R.drawable.paper_b);
         paper_map.put(2, R.drawable.paper_c);
         paper_map.put(3, R.drawable.paper_d);
-        paper_map.put(4, R.drawable.paper_f);
+        paper_map.put(4, R.drawable.paper_e);
     }
 
-    public boolean getIfPass(){
-        return pass;
+    public ImageView getView(){
+        return this.view;
     }
-
     public void generateRandomPaper(){
         //Pick a new paper sprite to display when called
         Random rand = new Random();
         Integer val = rand.nextInt(5);
         view.setImageResource(paper_map.get(val));
 
+    }
+
+    @Override
+    public void onSwipeEvent(SwipeEvent event) {
+        //generate new paper in ImageView
     }
 }

@@ -49,10 +49,10 @@ class MainActivity : AppCompatActivity() {
 
                 if (releasedAt <= LEFT_SWIPE_THRESH) {
                     Log.d("Gestures: ", "LEFT SWIPE DETECTED!")
-                    //Do left swipe processing here
+                    game.fireSwipeEvent(SwipeEvent(this, false))
                 } else if (releasedAt >= RIGHT_SWIPE_THRESH) {
                     Log.d("Gestures: ", "RIGHT SWIPE DETECTED!")
-                    //Do right swipe processing here
+                    game.fireSwipeEvent(SwipeEvent(this, true))
                 } else {
                     //If user doesn't swipe far enough to register a swipe animate the paper returning to center and don't change player score
                     Log.d("Gestures: ", "NO SWIPE DETECTED!")
@@ -62,7 +62,6 @@ class MainActivity : AppCompatActivity() {
                 paperView.visibility = View.INVISIBLE
                 Log.d("Released at: ", "$releasedAt")
                 paperView.x = initialX
-                game.setNewPaper()
                 paperView.visibility = View.VISIBLE
             }
             true
