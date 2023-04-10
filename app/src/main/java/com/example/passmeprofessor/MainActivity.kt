@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity() {
         game.buildTimer(10, findViewById(R.id.timerText))
         //Build first paper in game instance with ImageView paper
         game.buildPaper(findViewById(R.id.paper))
+        game.findScoreText(findViewById(R.id.scoreText))
         paperView = findViewById(R.id.paper)
 
         gestureDetector = GestureDetector(this, object : HorizontalSwipeListener() {
