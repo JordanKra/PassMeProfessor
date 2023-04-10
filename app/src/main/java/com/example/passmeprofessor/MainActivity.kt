@@ -56,6 +56,7 @@ class MainActivity : AppCompatActivity() {
         blurredBackground.setImageBitmap(originalBitmap)
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // Set the screen to main screen
