@@ -27,14 +27,21 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         // Set the screen to main screen
         setContentView(R.layout.activity_main)
+        paperView = findViewById(R.id.paper)
         //Create game instance
         game = Game()
+        //Build first paper in game instance with ImageView paper
+        game.buildPaper(paperView)
         //Build timer in game instance with TextView timerText and total game time
         game.buildTimer(10, findViewById(R.id.timerText))
-        //Build first paper in game instance with ImageView paper
-        game.buildPaper(findViewById(R.id.paper))
-        game.findScoreText(findViewById(R.id.scoreText))
-        paperView = findViewById(R.id.paper)
+        //Build rubric in game instance with rubric text views for A,B,C,D, and E
+        game.buildRubric(
+            findViewById(R.id.rubric_a),
+            findViewById(R.id.rubric_b),
+            findViewById(R.id.rubric_c),
+            findViewById(R.id.rubric_d),
+            findViewById(R.id.rubric_e)
+        )
 
         gestureDetector = GestureDetector(this, object : HorizontalSwipeListener() {
             override fun onSwipeHorizontal(diffX: Float) {

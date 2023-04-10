@@ -1,5 +1,6 @@
 package com.example.passmeprofessor;
 
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,11 +24,11 @@ public class Game {
         streak = 0;
     }
 
-    public void addTimerEndEventListener(TimerEndListener listener){
+    public void addTimerEndEventListener(TimerEndListener listener) {
         TimerEndListeners.add(listener);
     }
 
-    public void addSwipeEventListener(SwipeListener listener){
+    public void addSwipeEventListener(SwipeListener listener) {
         SwipeListeners.add(listener);
     }
 
@@ -40,13 +41,15 @@ public class Game {
 
     //Performs all operations necessary to build first Rubric
     public void buildRubric(TextView a, TextView b, TextView c, TextView d, TextView e) {
-        currentRubric = new Rubric(a,b,c,d,e);
+        currentRubric = new Rubric(a, b, c, d, e);
     }
 
     //Performs all operations necessary to build first Rubric
     public void buildPaper(ImageView imgView) {
         currentPaper = new Paper(imgView);
+        currentPaper.generateRandomPaper();
         addSwipeEventListener(this.currentPaper);
+        Log.d("PaperBuilder", currentPaper.getView().getTag().toString());
     }
 
     public void findScoreText(TextView score){
@@ -81,14 +84,14 @@ public class Game {
 
         //Get/Store the tag of the currentPaper's ImageView, use getTag, expect the values from R.string.letter_a, R.string.letter_b, .... see strings.xml
         String paperLetterGrade = String.valueOf(currentPaper.getView().getTag());
+        Log.d("Tag: ", paperLetterGrade);
         //Get the Boolean PASS/FAIL value of the letter grade from the rubric
         Boolean correctAnswer = currentRubric.getPassFailFromGrade(paperLetterGrade);
         Boolean userGuess = event.swipeDirection;
 
         if(userGuess == correctAnswer){
             event.correct = true;
-        }
-        else{
+        } else {
             event.correct = false;
         }
         return event;
@@ -104,8 +107,8 @@ public class Game {
     }
 
 
-    public void fireTimerEndEvent(TimerEndEvent event){
-        for(TimerEndListener listener: TimerEndListeners){
+    public void fireTimerEndEvent(TimerEndEvent event) {
+        for (TimerEndListener listener : TimerEndListeners) {
             listener.onTimerEnd(event);
         }
         //implement game over screen here
@@ -113,14 +116,16 @@ public class Game {
         showGameOver();
     }
 
-    public void fireSwipeEvent(SwipeEvent event){
+    public void fireSwipeEvent(SwipeEvent event) {
         event = evalSwipe(event);
-        for(SwipeListener listener: SwipeListeners){
+        for (SwipeListener listener : SwipeListeners) {
             listener.onSwipeEvent(event);
         }
         //implement score update here
         //call method that updates score based on the event swipe
         updateScore(event);
+        //Generate new paper
+        currentPaper.generateRandomPaper();
     }
 
 
