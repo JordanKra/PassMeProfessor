@@ -80,5 +80,7 @@ public class Timer implements TimerEndListener, SwipeListener{
 
         //Recall game rule: if the swipe is correct, user earns more time
             //if the swipe is incorrect, user loses time
+
+        //Placeholder, all logic is in Game class
     }
 }

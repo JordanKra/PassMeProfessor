@@ -14,9 +14,15 @@ public class Game {
     private Rubric currentRubric;
     private Paper currentPaper;
 
+    private TextView scoreText;
+
     private long score;
     private boolean started;
+    private long streak;
+
     public Game() {
+        score = 0;
+        streak = 0;
         started = false;
     }
 
@@ -51,12 +57,31 @@ public class Game {
         Log.d("PaperBuilder", currentPaper.getView().getTag().toString());
     }
 
+    public void findScoreText(TextView score){
+        this.scoreText = score;
+    }
+
     //Update score based on whether the SwipeEvent was correct
     public void updateScore(SwipeEvent event) {
         //Christian
         // please use method to encapsulate your logic for updating the score
         // on the condition that the swipe is correct
         //event has attribute Boolean correct that is initialized in Game.evalSwipe()
+
+        if(event.correct) {
+            if(streak > 2) {
+                score = score + (100 * streak);
+                timer.addTime(5);
+            } else {
+                score += 100;
+            }
+            streak++;
+        } else {
+            timer.subtractTime(5);
+            streak = 0;
+        }
+
+        scoreText.setText("" + score);
 
     }
 
@@ -68,7 +93,8 @@ public class Game {
         //Get the Boolean PASS/FAIL value of the letter grade from the rubric
         Boolean correctAnswer = currentRubric.getPassFailFromGrade(paperLetterGrade);
         Boolean userGuess = event.swipeDirection;
-        if (userGuess == correctAnswer) {
+
+        if(userGuess == correctAnswer){
             event.correct = true;
         } else {
             event.correct = false;
