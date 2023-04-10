@@ -23,7 +23,7 @@ public class Game {
     public Game() {
         score = 0;
         streak = 0;
-        started = false;
+        started = true;
     }
 
     public boolean getStarted(){
