@@ -15,11 +15,14 @@ public class Game {
     private Paper currentPaper;
 
     private long score;
-
+    private boolean started;
     public Game() {
-
+        started = false;
     }
 
+    public boolean getStarted(){
+        return started;
+    }
     public void addTimerEndEventListener(TimerEndListener listener) {
         TimerEndListeners.add(listener);
     }

@@ -105,10 +105,9 @@ class MainActivity : AppCompatActivity() {
 
         paperView.setOnTouchListener { _, motionEvent ->
             gestureDetector.onTouchEvent(motionEvent)
-            if (motionEvent.action == MotionEvent.ACTION_UP) {
+            if (motionEvent.action == MotionEvent.ACTION_UP && game.started) {
                 // Get x position of paper when it is released
                 val releasedAt = paperView.x
-
                 if (releasedAt <= LEFT_SWIPE_THRESH) {
                     Log.d("Gestures: ", "LEFT SWIPE DETECTED!")
                     game.fireSwipeEvent(SwipeEvent(this, false))
