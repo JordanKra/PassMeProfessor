@@ -26,7 +26,11 @@ public class Timer implements TimerEndListener, SwipeListener{
                 GameInstance.fireTimerEndEvent(new TimerEndEvent(this));
             }
 
-        }.start();
+        };
+    }
+
+    public void startTimer(){
+        timer.start();
     }
 
     public void addTime(int additionalSec){
