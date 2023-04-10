@@ -83,8 +83,6 @@ class MainActivity : AppCompatActivity() {
             }
         })
         var blurred = true
-        val timerText = findViewById<TextView>(R.id.timerText)
-        //var timer =  Timer(95, timerText)
 
         val blurButton = findViewById<Button>(R.id.blurButton)
         blurButton.setOnClickListener {
