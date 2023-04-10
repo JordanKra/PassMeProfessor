@@ -98,7 +98,7 @@ class MainActivity : AppCompatActivity() {
 
         val rootView = findViewById<View>(android.R.id.content)
         rootView.post {
-            applyBlurToBackground()
+            //applyBlurToBackground()
         }
 
 
