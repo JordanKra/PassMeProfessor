@@ -76,6 +76,7 @@ class MainActivity : AppCompatActivity() {
             findViewById(R.id.rubric_d),
             findViewById(R.id.rubric_e)
         )
+        game.findScoreText(findViewById(R.id.scoreText))
 
         gestureDetector = GestureDetector(this, object : HorizontalSwipeListener() {
             override fun onSwipeHorizontal(diffX: Float) {
