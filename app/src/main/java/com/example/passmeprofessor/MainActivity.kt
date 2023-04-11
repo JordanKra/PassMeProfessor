@@ -99,7 +99,8 @@ class MainActivity : AppCompatActivity(), TimerEndListener{
             findViewById(R.id.rubric_b),
             findViewById(R.id.rubric_c),
             findViewById(R.id.rubric_d),
-            findViewById(R.id.rubric_e)
+            findViewById(R.id.rubric_e),
+            findViewById(R.id.rubric)
         )
         game.findScoreText(findViewById(R.id.scoreText))
         makeAllInvisible()
@@ -128,6 +129,7 @@ class MainActivity : AppCompatActivity(), TimerEndListener{
         paperView.setOnTouchListener { _, motionEvent ->
             gestureDetector.onTouchEvent(motionEvent)
             if (motionEvent.action == MotionEvent.ACTION_UP && game.started) {
+                game.rubricSprite.background = null
                 // Get x position of paper when it is released
                 val releasedAt = paperView.x
                 if (releasedAt <= LEFT_SWIPE_THRESH) {
