@@ -34,6 +34,7 @@ public class Game {
         timer.resetTimer();
         timer.startTimer();
         score = 0;
+        scoreText.setText("" + score);
         rubricSprite.setBackground(null);
         currentRubric.generateRandomRubric();
         currentPaper.generateRandomPaper();
