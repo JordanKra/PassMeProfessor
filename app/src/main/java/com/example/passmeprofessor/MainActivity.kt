@@ -11,11 +11,10 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import android.widget.TextView
 import android.widget.Button
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), TimerEndListener{
 
     private lateinit var game: Game
 
@@ -56,6 +55,31 @@ class MainActivity : AppCompatActivity() {
         blurredBackground.setImageBitmap(originalBitmap)
     }
 
+    private fun makeAllInvisible(){
+        findViewById<View>(R.id.rubric_a).visibility =  View.INVISIBLE
+        findViewById<View>(R.id.rubric_b).visibility =  View.INVISIBLE
+        findViewById<View>(R.id.rubric_c).visibility =  View.INVISIBLE
+        findViewById<View>(R.id.rubric_d).visibility =  View.INVISIBLE
+        findViewById<View>(R.id.rubric_e).visibility =  View.INVISIBLE
+        findViewById<View>(R.id.timerText).visibility =  View.INVISIBLE
+        findViewById<View>(R.id.scoreText).visibility =  View.INVISIBLE
+        findViewById<View>(R.id.rubric).visibility =  View.INVISIBLE
+        paperView.visibility = View.INVISIBLE
+    }
+
+    private fun makeAllVisible(){
+        findViewById<View>(R.id.rubric_a).visibility =  View.VISIBLE
+        findViewById<View>(R.id.rubric_b).visibility =  View.VISIBLE
+        findViewById<View>(R.id.rubric_c).visibility =  View.VISIBLE
+        findViewById<View>(R.id.rubric_d).visibility =  View.VISIBLE
+        findViewById<View>(R.id.rubric_e).visibility =  View.VISIBLE
+        findViewById<View>(R.id.timerText).visibility =  View.VISIBLE
+        findViewById<View>(R.id.scoreText).visibility =  View.VISIBLE
+        findViewById<View>(R.id.rubric).visibility =  View.VISIBLE
+        paperView.visibility = View.VISIBLE
+    }
+
+
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,6 +88,7 @@ class MainActivity : AppCompatActivity() {
         paperView = findViewById(R.id.paper)
         //Create game instance
         game = Game()
+        game.addTimerEndEventListener(this)
         //Build first paper in game instance with ImageView paper
         game.buildPaper(paperView)
         //Build timer in game instance with TextView timerText and total game time
@@ -77,28 +102,27 @@ class MainActivity : AppCompatActivity() {
             findViewById(R.id.rubric_e)
         )
         game.findScoreText(findViewById(R.id.scoreText))
-
+        makeAllInvisible()
         gestureDetector = GestureDetector(this, object : HorizontalSwipeListener() {
             override fun onSwipeHorizontal(diffX: Float) {
                 paperView.x = initialX + diffX
             }
         })
-        var blurred = true
 
         val blurButton = findViewById<Button>(R.id.blurButton)
         blurButton.setOnClickListener {
-            blurred = if(blurred){
+                blurButton.isEnabled = false
+                blurButton.visibility = View.INVISIBLE
                 removeBlurFromBackground()
-                false
-            } else {
-                applyBlurToBackground()
-                true
-            }
+                makeAllVisible()
+                game.start();
         }
 
         val rootView = findViewById<View>(android.R.id.content)
         rootView.post {
+            blurButton.alpha = 0f
             applyBlurToBackground()
+            blurButton.alpha = 1f
         }
 
         paperView.setOnTouchListener { _, motionEvent ->
@@ -118,10 +142,10 @@ class MainActivity : AppCompatActivity() {
                     animateImageViewToInitialPosition()
                     return@setOnTouchListener true
                 }
-                paperView.visibility = View.INVISIBLE
+                //paperView.visibility = View.INVISIBLE
                 Log.d("Released at: ", "$releasedAt")
                 paperView.x = initialX
-                paperView.visibility = View.VISIBLE
+                //paperView.visibility = View.VISIBLE
             }
             true
         }
@@ -133,5 +157,14 @@ class MainActivity : AppCompatActivity() {
         animator = ObjectAnimator.ofFloat(paperView, "x", initialX)
         animator.duration = 300
         animator.start()
+    }
+
+    override fun onTimerEnd(event: TimerEndEvent?) {
+        makeAllInvisible()
+        applyBlurToBackground()
+        val blurButton = findViewById<Button>(R.id.blurButton)
+        blurButton.text = "Try Again"
+        blurButton.isEnabled = true
+        blurButton.visibility = View.VISIBLE
     }
 }

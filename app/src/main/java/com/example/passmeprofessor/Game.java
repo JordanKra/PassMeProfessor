@@ -12,6 +12,7 @@ public class Game {
     private List<SwipeListener> SwipeListeners = new ArrayList<>();
     private Timer timer;
     private Rubric currentRubric;
+
     private Paper currentPaper;
 
     private TextView scoreText;
@@ -25,6 +26,17 @@ public class Game {
         streak = 0;
         started = true;
     }
+
+    public void start(){
+        started = true;
+        timer.resetTimer();
+        timer.startTimer();
+        score = 0;
+        currentRubric.generateRandomRubric();
+        currentPaper.generateRandomPaper();
+    }
+
+
 
     public boolean getStarted(){
         return started;
@@ -118,7 +130,8 @@ public class Game {
         }
         //implement game over screen here
         //call methods that present game over screen
-        showGameOver();
+        started = false;
+
     }
 
     public void fireSwipeEvent(SwipeEvent event) {
