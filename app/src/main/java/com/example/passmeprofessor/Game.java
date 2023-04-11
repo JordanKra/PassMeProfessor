@@ -13,6 +13,8 @@ public class Game {
     private Timer timer;
     private Rubric currentRubric;
 
+    private ImageView rubricSprite;
+
     private Paper currentPaper;
 
     private TextView scoreText;
@@ -32,11 +34,14 @@ public class Game {
         timer.resetTimer();
         timer.startTimer();
         score = 0;
+        rubricSprite.setBackground(null);
         currentRubric.generateRandomRubric();
         currentPaper.generateRandomPaper();
     }
 
-
+    public ImageView getRubricSprite(){
+        return rubricSprite;
+    }
 
     public boolean getStarted(){
         return started;
@@ -57,8 +62,9 @@ public class Game {
     }
 
     //Performs all operations necessary to build first Rubric
-    public void buildRubric(TextView a, TextView b, TextView c, TextView d, TextView e) {
+    public void buildRubric(TextView a, TextView b, TextView c, TextView d, TextView e, ImageView sprite) {
         currentRubric = new Rubric(a, b, c, d, e);
+        rubricSprite = sprite;
     }
 
     //Performs all operations necessary to build first Rubric
@@ -91,6 +97,10 @@ public class Game {
         } else {
             timer.subtractTime(5);
             streak = 0;
+        }
+        if(streak % 5 == 0){
+            currentRubric.generateRandomRubric();
+            rubricSprite.setBackgroundResource(R.drawable.image_border);
         }
 
         scoreText.setText("" + score);
