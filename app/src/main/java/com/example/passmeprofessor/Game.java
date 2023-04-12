@@ -106,7 +106,7 @@ public class Game {
             timer.subtractTime(5);
             streak = 0;
         }
-        if(streak % 5 == 0){
+        if(streak % 5 == 0 && streak != 0){
             currentRubric.generateRandomRubric();
             rubricSprite.setBackgroundResource(R.drawable.image_border);
         }
