@@ -188,8 +188,8 @@
 
     <ImageView
         android:id="@+id/paper"
-        android:layout_width="149dp"
-        android:layout_height="408dp"
+        android:layout_width="140dp"
+        android:layout_height="158dp"
         android:layout_marginTop="323dp"
         android:tag="@string/letter_a"
         app:layout_constraintBottom_toBottomOf="parent"

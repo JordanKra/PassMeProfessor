@@ -37,7 +37,7 @@ public class Timer implements TimerEndListener, SwipeListener{
     public void resetTimer(){
         timer.cancel();
         timer = null;
-        long newTime = 10 * 1000;
+        long newTime = 30 * 1000;
 
         timer = new CountDownTimer(newTime, 1000){
             public void onTick(long millisUntilFinished){
@@ -98,13 +98,13 @@ public class Timer implements TimerEndListener, SwipeListener{
 
     @Override
     public void onSwipeEvent(SwipeEvent event) {
-        //event has attribute Boolean correct that is initialized in Game.evalSwipe()
-        //if correct == true, then the user got the swipe correct
-        //if correct == false, then the user got the swipe wrong
-
-        //Recall game rule: if the swipe is correct, user earns more time
-            //if the swipe is incorrect, user loses time
-
-        //Placeholder, all logic is in Game class
+        if(event.correct) {
+            if(GameInstance.getStreak() > 2) {
+                addTime(5);
+            }
+        }
+        else {
+            subtractTime(5);
+        }
     }
 }
