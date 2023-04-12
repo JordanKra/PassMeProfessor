@@ -57,6 +57,8 @@ public class Paper implements SwipeListener {
 
     @Override
     public void onSwipeEvent(SwipeEvent event) {
-        //generate new paper in ImageView
+        generateRandomPaper();
+        view.setBackgroundResource(R.drawable.image_border);
+
     }
 }

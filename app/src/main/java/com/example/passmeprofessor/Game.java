@@ -17,6 +17,8 @@ public class Game {
 
     private Paper currentPaper;
 
+    private ImageView paperSprite;
+
     private TextView scoreText;
 
     private long score;
@@ -27,6 +29,7 @@ public class Game {
         score = 0;
         streak = 0;
         started = true;
+
     }
 
     public void start(){
@@ -44,6 +47,14 @@ public class Game {
         return rubricSprite;
     }
 
+    public ImageView getPaperSprite(){
+        return paperSprite;
+    }
+
+
+    public long getStreak(){
+        return streak;
+    }
     public boolean getStarted(){
         return started;
     }
@@ -72,6 +83,7 @@ public class Game {
     public void buildPaper(ImageView imgView) {
         currentPaper = new Paper(imgView);
         currentPaper.generateRandomPaper();
+        paperSprite = currentPaper.getView();
         addSwipeEventListener(this.currentPaper);
         Log.d("PaperBuilder", currentPaper.getView().getTag().toString());
     }
@@ -82,11 +94,6 @@ public class Game {
 
     //Update score based on whether the SwipeEvent was correct
     public void updateScore(SwipeEvent event) {
-        //Christian
-        // please use method to encapsulate your logic for updating the score
-        // on the condition that the swipe is correct
-        //event has attribute Boolean correct that is initialized in Game.evalSwipe()
-
         if(event.correct) {
             if(streak > 2) {
                 score = score + (100 * streak);
@@ -126,8 +133,7 @@ public class Game {
     }
 
     public void showGameOver() {
-        //John
-        // please use this method to encapsulate all your game over screen state changes
+
     }
 
     public void setNewPaper() {
@@ -139,23 +145,16 @@ public class Game {
         for (TimerEndListener listener : TimerEndListeners) {
             listener.onTimerEnd(event);
         }
-        //implement game over screen here
-        //call methods that present game over screen
+        //Game has ended, set started to false
         started = false;
 
     }
 
     public void fireSwipeEvent(SwipeEvent event) {
         event = evalSwipe(event);
+        updateScore(event);
         for (SwipeListener listener : SwipeListeners) {
             listener.onSwipeEvent(event);
         }
-        //implement score update here
-        //call method that updates score based on the event swipe
-        updateScore(event);
-        //Generate new paper
-        currentPaper.generateRandomPaper();
     }
-
-
 }
