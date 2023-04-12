@@ -62,6 +62,10 @@ public class Game {
         TimerEndListeners.add(listener);
     }
 
+    public long getScore(){
+        return score;
+    }
+
     public void addSwipeEventListener(SwipeListener listener) {
         SwipeListeners.add(listener);
     }
