@@ -2,6 +2,11 @@
 
 ## Summary
 
+Pass Me Professor is a fun action game that has you grade your students papers using an ever changing rubric. A new paper will appear on your desk with a letter grade attached, its your job
+to determine if based on the rubric whether that student passes or fails. Swiping right will indicate the student passes while swiping left will indicate they failed. As you grade papers correctly
+more time will be added to the limit and your score will increase. Getting papers wrong will result in a decrease in time remaining. Every 5 papers graded correctly will result in the rubric changing.
+The goal of Pass Me Professor is to get as many points as possible before the time runs out!
+
 ## Deployment Instructions
 - Install Android Studio using the install instructions [here](https://developer.android.com/studio/install)
 - Download the git repo to your computer using either Github Desktop, or using the git command line.
