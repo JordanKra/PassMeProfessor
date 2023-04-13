@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity(), TimerEndListener{
     private var mSwipeSlop = 0
     private var mSwiping = false
     private var mViewParent: ViewGroup? = null
+    private var mainMusic: MediaPlayer? = null
 
 
     @SuppressLint("ClickableViewAccessibility")
@@ -36,6 +37,7 @@ class MainActivity : AppCompatActivity(), TimerEndListener{
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         // Set the screen to main screen
         setContentView(R.layout.activity_main)
         mSwipeSlop = ViewConfiguration.get(this).getScaledTouchSlop()
@@ -67,17 +69,6 @@ class MainActivity : AppCompatActivity(), TimerEndListener{
                 paperView.x = initialX + diffX
             }
         })
-
-        var mainMusic: MediaPlayer? = null
-        if(mainMusic == null) {
-            mainMusic = MediaPlayer.create(this, R.raw.fatrat)
-            if (mainMusic != null) {
-                mainMusic.isLooping = true
-            }
-            if (mainMusic != null) {
-                mainMusic.start()
-            }
-        }
 
         val blurButton = findViewById<Button>(R.id.blurButton)
         blurButton.setOnClickListener {
@@ -137,6 +128,19 @@ class MainActivity : AppCompatActivity(), TimerEndListener{
                 //paperView.visibility = View.VISIBLE
             }
             true
+
+            }
+        mainMusic?.setOnErrorListener { mp, what, extra ->
+            Log.e("MediaPlayer", "Error occurred: what=$what, extra=$extra")
+            true
+        }
+        if(mainMusic == null) {
+            mainMusic = MediaPlayer.create(this, R.raw.fatrat)
+            if (mainMusic != null) {
+                mainMusic!!.isLooping = true
+            }
+            mainMusic?.start()
+
         }
 
     }
