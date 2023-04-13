@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -62,6 +63,17 @@ class MainActivity : AppCompatActivity(), TimerEndListener{
                 paperView.x = initialX + diffX
             }
         })
+
+        var mainMusic: MediaPlayer? = null
+        if(mainMusic == null) {
+            mainMusic = MediaPlayer.create(this, R.raw.fatrat)
+            if (mainMusic != null) {
+                mainMusic.isLooping = true
+            }
+            if (mainMusic != null) {
+                mainMusic.start()
+            }
+        }
 
         val blurButton = findViewById<Button>(R.id.blurButton)
         blurButton.setOnClickListener {
