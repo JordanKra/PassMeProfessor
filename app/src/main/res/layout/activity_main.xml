@@ -51,6 +51,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="210dp"
+        android:layout_height="278dp"
+        android:layout_marginStart="101dp"
+        android:layout_marginEnd="101dp"
+        android:layout_marginBottom="280dp"
+        android:contentDescription="@string/rubric_desc"
+        android:padding="5dp"
+        android:scaleType="centerInside"
+        android:translationY="-125dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/pmp1" />
+
     <ImageView
         android:id="@+id/rubric"
         android:layout_width="210dp"
@@ -59,9 +77,9 @@
         android:layout_marginEnd="101dp"
         android:layout_marginBottom="272dp"
         android:contentDescription="@string/rubric_desc"
-        android:translationY="-125dp"
-        android:scaleType="centerInside"
         android:padding="5dp"
+        android:scaleType="centerInside"
+        android:translationY="-125dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -178,7 +196,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="88dp"
+        android:backgroundTint="#FF9453"
         android:text="Start Game"
+        android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -197,6 +217,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/paper_a" />
+
+    <TextView
+        android:id="@+id/finalScore"
+        android:layout_width="246dp"
+        android:layout_height="67dp"
+        android:layout_marginTop="500dp"
+        android:layout_marginEnd="154dp"
+        android:layout_marginBottom="50dp"
+        android:text="Score: "
+        android:textColor="#000000"
+        android:textSize="14pt"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="12.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/leftInstructionText"

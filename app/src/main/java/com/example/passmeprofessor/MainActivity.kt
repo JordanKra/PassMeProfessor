@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.*
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 
@@ -57,6 +58,9 @@ class MainActivity : AppCompatActivity(), TimerEndListener{
         )
         game.findScoreText(findViewById(R.id.scoreText))
         makeAllInvisible()
+
+        //make score text invisible
+        findViewById<TextView>(R.id.finalScore).visibility =  View.INVISIBLE
         gestureDetector = GestureDetector(this, object : HorizontalSwipeListener() {
             override fun onSwipeHorizontal(diffX: Float) {
                 paperView.x = initialX + diffX
@@ -68,6 +72,7 @@ class MainActivity : AppCompatActivity(), TimerEndListener{
                 blurButton.isEnabled = false
                 blurButton.visibility = View.INVISIBLE
                 removeBlurFromBackground()
+               // findViewById<TextView>(R.id.finalScore).visibility =  View.INVISIBLE
                 makeAllVisible()
                 game.start()
         }
@@ -78,6 +83,7 @@ class MainActivity : AppCompatActivity(), TimerEndListener{
             applyBlurToBackground()
             blurButton.alpha = 1f
         }
+
         mSwipeSlop = ViewConfiguration.get(this).scaledTouchSlop
         paperView.setOnTouchListener { _, motionEvent ->
             gestureDetector.onTouchEvent(motionEvent)
@@ -131,8 +137,11 @@ class MainActivity : AppCompatActivity(), TimerEndListener{
 
     override fun onTimerEnd(event: TimerEndEvent?) {
         makeAllInvisible()
+        findViewById<TextView>(R.id.finalScore).visibility =  View.INVISIBLE
         applyBlurToBackground()
         val blurButton = findViewById<Button>(R.id.blurButton)
+        findViewById<TextView>(R.id.finalScore).setText("Score: " + game.score)
+        findViewById<TextView>(R.id.finalScore).visibility =  View.VISIBLE
         blurButton.text = "Try Again"
         blurButton.isEnabled = true
         blurButton.visibility = View.VISIBLE
@@ -174,6 +183,7 @@ class MainActivity : AppCompatActivity(), TimerEndListener{
         findViewById<View>(R.id.timerText).visibility =  View.INVISIBLE
         findViewById<View>(R.id.scoreText).visibility =  View.INVISIBLE
         findViewById<View>(R.id.rubric).visibility =  View.INVISIBLE
+        findViewById<TextView>(R.id.finalScore).visibility =  View.VISIBLE
         findViewById<View>(R.id.leftInstructionText).visibility = View.INVISIBLE
         findViewById<View>(R.id.rightInstructionText).visibility = View.INVISIBLE
         paperView.visibility = View.INVISIBLE
@@ -188,6 +198,7 @@ class MainActivity : AppCompatActivity(), TimerEndListener{
         findViewById<View>(R.id.timerText).visibility =  View.VISIBLE
         findViewById<View>(R.id.scoreText).visibility =  View.VISIBLE
         findViewById<View>(R.id.rubric).visibility =  View.VISIBLE
+        findViewById<TextView>(R.id.finalScore).visibility =  View.INVISIBLE
         findViewById<View>(R.id.leftInstructionText).visibility = View.VISIBLE
         findViewById<View>(R.id.rightInstructionText).visibility = View.VISIBLE
         paperView.visibility = View.VISIBLE
