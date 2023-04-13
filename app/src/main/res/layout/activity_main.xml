@@ -234,4 +234,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
+        android:id="@+id/leftInstructionText"
+        android:layout_width="180dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="664dp"
+        android:layout_marginEnd="215dp"
+        android:layout_marginBottom="36dp"
+        android:text="Swipe Left to Fail!"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/blurred_background"
+        app:layout_constraintEnd_toEndOf="@+id/blurred_background"
+        app:layout_constraintStart_toStartOf="@+id/blurred_background"
+        app:layout_constraintTop_toTopOf="@+id/blurred_background" />
+
+    <TextView
+        android:id="@+id/rightInstructionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="664dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="40dp"
+        android:text="Swipe Right to Pass!"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/blurred_background"
+        app:layout_constraintEnd_toEndOf="@+id/blurred_background"
+        app:layout_constraintTop_toTopOf="@+id/blurred_background" />
 </androidx.constraintlayout.widget.ConstraintLayout>

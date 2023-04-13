@@ -184,6 +184,8 @@ class MainActivity : AppCompatActivity(), TimerEndListener{
         findViewById<View>(R.id.scoreText).visibility =  View.INVISIBLE
         findViewById<View>(R.id.rubric).visibility =  View.INVISIBLE
         findViewById<TextView>(R.id.finalScore).visibility =  View.VISIBLE
+        findViewById<View>(R.id.leftInstructionText).visibility = View.INVISIBLE
+        findViewById<View>(R.id.rightInstructionText).visibility = View.INVISIBLE
         paperView.visibility = View.INVISIBLE
     }
 
@@ -197,6 +199,8 @@ class MainActivity : AppCompatActivity(), TimerEndListener{
         findViewById<View>(R.id.scoreText).visibility =  View.VISIBLE
         findViewById<View>(R.id.rubric).visibility =  View.VISIBLE
         findViewById<TextView>(R.id.finalScore).visibility =  View.INVISIBLE
+        findViewById<View>(R.id.leftInstructionText).visibility = View.VISIBLE
+        findViewById<View>(R.id.rightInstructionText).visibility = View.VISIBLE
         paperView.visibility = View.VISIBLE
     }
 
