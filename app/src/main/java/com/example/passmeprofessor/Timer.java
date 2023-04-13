@@ -73,8 +73,10 @@ public class Timer implements TimerEndListener, SwipeListener{
 
     public void subtractTime(int secLost){
         timer.cancel();
-
         long newTime = (secondsLeft - secLost) * 1000;
+        if(secondsLeft < 5){ //resetting new time to 10ms
+            newTime = 10;
+        }
 
         timer = new CountDownTimer(newTime, 1000){
             public void onTick(long millisUntilFinished){

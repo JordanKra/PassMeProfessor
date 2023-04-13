@@ -162,6 +162,7 @@ class MainActivity : AppCompatActivity(), TimerEndListener{
         blurButton.isEnabled = true
         blurButton.visibility = View.VISIBLE
     }
+
     private fun captureViewBitmap(view: View): Bitmap {
         val bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
